@@ -1,15 +1,17 @@
-class Sneaker {
+/*  class Sneaker {
     constructor(name, color, releaseDate, retailPrice, profit){
-        this.age = 18;
+        this.styleCode = this.styleCode
         this.name = 'Carlo';
     }
     calculateBirthYear(){
         return (new Date().getFullYear - this.age);
     };
-};
+};  */
+var request = 'request'
+request.get('https://stockx.com/api/v3/browse?productCategory=sneakers', function(error, response, body){
+    console.log('body',body);
+})
 
-const steve = new Person (44, 'Steve');
- 
 
 //one class to create the object person, album, movie ***Model
 //take args
