@@ -17,12 +17,7 @@ class Sneaker {
 
 /* const jordan = new Sneaker('jrodan', 11, 240, 'no', 260);
 console.log(jordan); */
-const form = document.getElementById('#sneaker-form')
-const userName = document.getElementById('#name');
-const userSize = document.getElementById('#size');
-const userPrice = document.getElementById('#price');
-const userImage = document.getElementById('#image');
-const display = document.getElementById('.display');
+
 
 //****View */ class for the UI which contains methods
 // creates/insert html for the UI DISPLAY
@@ -33,7 +28,7 @@ const display = document.getElementById('.display');
 
 
 
-class ui{
+class UI{
     htmlAddition(sneaker){
         let html = '<div class="display-sneaker"><div class="display-name">%name%</div><div class="display-size">%size%</div><div class="display-price">%price%</div><div class="display-sold">%sold%</div><div class="display-image"><img src="%url%" alt=""></div><div class="remove-sneaker"><p class="remove-sneaker"> Remove Sneaker &#10006;</p></div></div>'; 
 
@@ -42,38 +37,40 @@ class ui{
     newHtml = newHtml.replace('%price%', sneaker.price);
     newHtml = newHtml.replace('%sold%', sneaker.sold);
     newHtml = newHtml.replace('%url%', sneaker.image);
-    document.getElementById('.display').insertAdjacentHTML('beforeend', newHtml);
+    document.querySelector('.display').insertAdjacentHTML('beforeend', newHtml);
     }
     clearFields(){
-        document.getElementById('name');
-        document.getElementById('size');
-        document.getElementById('price');
-        document.getElementById('image');
+        document.getElementById('name').value = '';
+        document.getElementById('size').value = '';
+        document.getElementById('price').value = '';
+        document.getElementById('sold').value = '';
+        document.getElementById('image').value = '';
     };
     
-    removeSneaker(el){
-        if(el.target.parentElement.classList.contains('remove-sneaker')){
-            el.target.parentElement.parentElement.remove();
+    removeSneaker(target){
+        if(target.parentElement.classList.contains('remove-sneaker')){
+            target.parentElement.remove();
         };
 
 };
 
 }
 
-document.getElementbyId('sneaker-form').addEventListener('submit',function(e){
+document.getElementById('sneaker-form').addEventListener('submit',function(e){
     const name = document.getElementById('name').value;
     const size = document.getElementById('size').value;
     const price = document.getElementById('price').value;
+    const sold = document.getElementById('sold').value;
     const image = document.getElementById('image').value;
     
 
     const sneaker = new Sneaker(name, size, price, sold, image);
 
-    const ui = new ui();
+    const ui = new UI();
 
     ui.clearFields();
     ui.htmlAddition(sneaker);
-    ui.removeSneaker(el);
+    
     
 
 });
