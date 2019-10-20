@@ -30,7 +30,8 @@ console.log(jordan); */
 
 class UI{
     htmlAddition(sneaker){
-        let html = '<div class="display-sneaker"><div class="display-name">%name%</div><div class="display-size">%size%</div><div class="display-price">%price%</div><div class="display-sold">%sold%</div><div class="display-image"><img src="%url%" alt=""></div><div class="remove-sneaker"><p class="remove-sneaker"> Remove Sneaker &#10006;</p></div></div>'; 
+    const display = document.querySelector('.display');
+    let html = '<div class="display-sneaker"><div class="display-name">%name%</div><div class="display-size">%size%</div><div class="display-price">%price%</div><div class="display-sold">%sold%</div><div class="display-image"><img src="%url%" alt=""></div><div class="remove-sneaker"><p class="remove-sneaker"> Remove Sneaker &#10006;</p></div></div>'; 
 
     let newHtml = html.replace('%name%', sneaker.name);
     newHtml = newHtml.replace('%size%', sneaker.size);
@@ -48,11 +49,11 @@ class UI{
     };
     
     removeSneaker(target){
-        if(target.parentElement.classList.contains('remove-sneaker')){
+        if(target.Sneaker === 'remove-sneaker'){
             target.parentElement.remove();
         };
 
-};
+    };
 
 }
 
@@ -67,13 +68,25 @@ document.getElementById('sneaker-form').addEventListener('submit',function(e){
     const sneaker = new Sneaker(name, size, price, sold, image);
 
     const ui = new UI();
-
-    ui.clearFields();
     ui.htmlAddition(sneaker);
+    ui.clearFields();
+    e.preventDefault();
     
     
 
 });
+
+document.querySelector('.display').addEventListener('click', function(e){
+    const ui = new UI();
+
+   
+    ui.removeSneaker(e.target);    
+    
+
+    ui.clearFields();
+
+    e.preventDefault();
+})
 //controller combines the ui and model
 
 //event handler with function
