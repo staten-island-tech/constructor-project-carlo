@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/cdugo/carlo-contructor-project#readme",
   "dependencies": {
+    "request": "^2.88.0",
     "tailwindcss": "^1.1.2"
   }
 }
