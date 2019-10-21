@@ -9,12 +9,12 @@ class Sneaker {
         this.image = image;
         this.sold = sold;
         
-    }
-    calculateProfit(){
+    
+    this.profit = function(){
         return (this.sold - this.price);
     };
 };  
-
+};
 /* const jordan = new Sneaker('jrodan', 11, 240, 'no', 260);
 console.log(jordan); */
 
@@ -30,14 +30,15 @@ console.log(jordan); */
 
 class UI{
     htmlAddition(sneaker){
-    const display = document.querySelector('.display');
-    let html = '<div class="display-sneaker"><div class="display-name">%name%</div><div class="display-size">%size%</div><div class="display-price">%price%</div><div class="display-sold">%sold%</div><div class="display-image"><img src="%url%" alt=""></div><div class="remove-sneaker"><p class="remove-sneaker"> Remove Sneaker &#10006;</p></div></div>'; 
 
+    let html = '<div class="display-sneaker"><div class="display-name">%name%</div><div class="display-size">%size%</div><div class="display-price">%price%</div><div class="display-sold">%sold%</div><div class="display-image"><img src="%url%" alt=""></div><p id="profit">%profit%</p><div class="remove-sneaker"><p class="remove-sneaker"> Remove Sneaker &#10006;</p></div></div>'; 
+    const profit = sold.value - price.value;
     let newHtml = html.replace('%name%', sneaker.name);
     newHtml = newHtml.replace('%size%', sneaker.size);
     newHtml = newHtml.replace('%price%', sneaker.price);
     newHtml = newHtml.replace('%sold%', sneaker.sold);
     newHtml = newHtml.replace('%url%', sneaker.image);
+    newHtml = newHtml.replace('%profit%', profit);
     document.querySelector('.display').insertAdjacentHTML('beforeend', newHtml);
     }
     clearFields(){
@@ -49,13 +50,14 @@ class UI{
     };
     
     removeSneaker(target){
-        if(target.Sneaker === 'remove-sneaker'){
+        if (target.className === "remove-sneaker"){
             target.parentElement.remove();
+        
         };
 
     };
+};
 
-}
 
 document.getElementById('sneaker-form').addEventListener('submit',function(e){
     const name = document.getElementById('name').value;
@@ -68,8 +70,12 @@ document.getElementById('sneaker-form').addEventListener('submit',function(e){
     const sneaker = new Sneaker(name, size, price, sold, image);
 
     const ui = new UI();
+    if(name === '' || size === '' ||  price === '' || sold === '' || image === '' ) {
+        alert ('fields are missing'); 
+    } else {
     ui.htmlAddition(sneaker);
     ui.clearFields();
+    };
     e.preventDefault();
     
     
